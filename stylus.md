@@ -236,9 +236,9 @@ $HighlightMenu-color-greyLight ?= rgb(51, 51, 50)
     color: $HighlightMenu-color-greyLight
 ```
 
-All component variables should be defined inside the component file and using existential operator `?=` to allow override from global `variables.styl`.
+All component variables should be defined inside the component file and using existential operator `?=`.
 
-If you need to use _first_ component's variable in a _second_ component you should duplicate this variable into global `variables.styl` but using `=` operator this time:
+If you need to use _first component_'s variable in a _second component_ you should duplicate this variable into global `variables.styl` but using `=` operator this time:
 
 ```sass
 // variables.styl
