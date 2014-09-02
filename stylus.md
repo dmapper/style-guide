@@ -256,7 +256,7 @@ $Topbar-height ?= 80px
 
 
 <a name="typography"></a>
-## Typogrpahy
+## Typography
 
 
 <a name="vertical-rhythm"></a>
