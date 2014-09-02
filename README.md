@@ -3,8 +3,6 @@ Decision Mapper Style Guide
 
 ## [Stylus](/stylus.md)
 
-**Table of contents**
-
 * [JavaScript](/stylus.md/#javascript)
 * [Utilities](/stylus.md/#utilities)
   * [u-utilityName](/stylus.md/#u-utilityName)
