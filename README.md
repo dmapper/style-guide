@@ -1,4 +1,6 @@
 style-guide
 ===========
 
-Decision Mapper Coding Guidelines for Stylus, Jade and CoffeeScript
+Decision Mapper Style Guide
+
+## Stylus
