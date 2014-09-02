@@ -221,8 +221,8 @@ Syntax: `[ComponentName-]<property>-<value>`
 
 Variable names in our CSS are also strictly structured. This syntax provides strong associations between property, use, and component.
 
-Global and component-level variables MUST start with `$`. 
-Local variables inside functions and mixins can omit leading `$`.
+Global and component-level variables MUST start with `$`.  
+Local variables inside functions and mixins may omit leading `$`.
 
 The following variable defintion is a color property, with the value grayLight, for use with the HighlightMenu component.
 
