@@ -13,10 +13,10 @@ Influenced by:
 * [Utilities](#utilities)
   * [u-utilityName](#u-utilityName)
 * [Components](#components)
-  * [ComponentName](#ComponentName)
-  * [ComponentName.-modifierName](#ComponentName--modifierName)
-  * [ComponentName-descendantName](#ComponentName-descendantName)
-  * [ComponentName.is-stateOfComponent](#is-stateOfComponent)
+  * [componentName](#ComponentName)
+  * [componentName.-modifierName](#ComponentName--modifierName)
+  * [componentName-descendantName](#ComponentName-descendantName)
+  * [componentName.is-stateOfComponent](#is-stateOfComponent)
 * [Layouts](#layouts)
 * [Variables](#variables)
 * [Typography](#typography)
@@ -78,7 +78,7 @@ Utilities must use a camel case name, prefixed with a `u` namespace. What follow
 <a name="components"></a>
 ## Components
 
-Syntax: `<ComponentName>[-descendantName|.-modifierName]`
+Syntax: `<componentName>[-descendantName|.-modifierName]`
 
 Component driven development offers several benefits when reading and writing HTML and CSS:
 
@@ -89,29 +89,29 @@ Component driven development offers several benefits when reading and writing HT
 You can think of components as custom elements that enclose specific semantics, styling, and behaviour.
 
 
-<a name="ComponentName"></a>
-### ComponentName
+<a name="componentName"></a>
+### componentName
 
-The component's name must be written in pascal case. Nothing else in the HTML/CSS uses pascal case.
+The component's name must be written in camel case.
 
 ```sass
-.MyComponent 
+.myComponent 
   // …
 ```
 
 ```jade
-article.MyComponent
+article.myComponent
   // …
 ```
 
-<a name="ComponentName.-modifierName"></a>
-### ComponentName.-modifierName
+<a name="componentName.-modifierName"></a>
+### componentName.-modifierName
 
 A component modifier is a class that modifies the presentation of the base component in some form. Modifier names must be written in camel case and start with the hyphen. The class should be included in the HTML _in addition_ to the base component class.
 
 ```sass
 // Core button
-.Button 
+.btn
   // …
   
   // Default button style
@@ -124,16 +124,16 @@ A component modifier is a class that modifies the presentation of the base compo
 ```
 
 ```jade
-button.Button.-primary
+button.btn.-primary
   // …
 ```
-<a name="ComponentName-descendantName"></a>
-### ComponentName-descendantName
+<a name="componentName-descendantName"></a>
+### componentName-descendantName
 
 A component descendant is a class that is attached to a descendant node of a component. It's responsible for applying presentation directly to the descendant on behalf of a particular component. Descendant names must be written in camel case.
 
 ```sass
-.Tweet
+.tweet
   background #eee
   &-header
     font-size 30px
@@ -144,30 +144,30 @@ A component descendant is a class that is attached to a descendant node of a com
 ```
 
 ```jade
-article.Tweet
-  header.Tweet-header
-    img.Tweet-avatar(src='{{src}}' alt='{{alt}}')
+article.tweet
+  header.tweet-header
+    img.tweet-avatar(src='{{src}}' alt='{{alt}}')
     // …
-  .Tweet-body
+  .tweet-body
     // …
 ```
 
 <a name="is-stateOfComponent"></a>
-### ComponentName.is-stateOfComponent
+### componentName.is-stateOfComponent
 
 Use `is-stateName` for state-based modifications of components. The state name must be Camel case. **Never style these classes directly; they should always be used as an adjoining class.**
 
 JS can add/remove these classes. This means that the same state names can be used in multiple contexts, but every component must define its own styles for the state (as they are scoped to the component).
 
 ```sass
-.Tweet 
+.tweet 
   // …
   &.is-expanded 
     // …
 ```
 
 ```jade
-article.Tweet.is-expanded
+article.tweet.is-expanded
   // …
 ```
 
@@ -217,7 +217,7 @@ body.-users-show
 <a name="variables"></a>
 ## Variables
 
-Syntax: `[ComponentName-]<property>-<value>`
+Syntax: `[componentName-]<property>-<value>`
 
 Variable names in our CSS are also strictly structured. This syntax provides strong associations between property, use, and component.
 
@@ -229,11 +229,11 @@ The following variable defintion is a color property, with the value grayLight, 
 ```sass
 // highlightMenu.styl
 
-$HighlightMenu-color-greyLight ?= rgb(51, 51, 50)
+$highlightMenu-color-greyLight ?= rgb(51, 51, 50)
 
-.HighlightMenu
+.highlightMenu
   li 
-    color: $HighlightMenu-color-greyLight
+    color: $highlightMenu-color-greyLight
 ```
 
 All component variables should be defined inside the component file and using existential operator `?=`.
@@ -242,16 +242,16 @@ If you need to use _first component_'s variable in a _second component_ you shou
 
 ```sass
 // variables.styl
-$Topbar-height = 80px
+$topbar-height = 80px
 
 // topbar.styl
-$Topbar-height ?= 80px
-.Topbar
-  height $Topbar-height
+$topbar-height ?= 80px
+.topbar
+  height $topbar-height
 
 // topmenu.styl
-.Topmenu
-  line-height $Topbar-height
+.topmenu
+  line-height $topbar-height
 ```
 
 
@@ -266,7 +266,7 @@ Basis for our typography is Vertical Rhythm -- page is vertically divided on lin
 When you deal with vertical sizes of anything (especially top/bottom margin/padding) try to avoid using `px`, instead use `rym()` function that returns proper size correspending to the specified amount of lines: 
 
 ```sass
-.Header
+.header
   padding-top rym(1)
   padding-bottom @padding-top
   margin-bottom rym(4)
@@ -309,7 +309,7 @@ Don't use any optional in Stylus symbols -- `:`, `;`, `{}`
 
 **Right:**
 ```css
-.Tweet
+.tweet
   color green
   background linear-gradient(#000, #fff)
   a
@@ -318,7 +318,7 @@ Don't use any optional in Stylus symbols -- `:`, `;`, `{}`
 
 **Wrong:**
 ```css
-.Tweet {
+.tweet {
   color: green;
   background: linear-gradient(#000, #fff);
   a {
@@ -335,7 +335,7 @@ Prefer nesting selectors. But no more then 3rd level (pseudo-classes and pseudo-
 
 **Right:**
 ```sass
-.Tweet
+.tweet
   &-header
     // …
   &-avatar
@@ -348,7 +348,7 @@ Prefer nesting selectors. But no more then 3rd level (pseudo-classes and pseudo-
     li
       float left
       
-.Tweet-footer.is-active .Social
+.tweet-footer.is-active .Social
   a
     text-decoration none
   &-facebook
@@ -360,10 +360,10 @@ Prefer nesting selectors. But no more then 3rd level (pseudo-classes and pseudo-
 
 **Wrong:**
 ```sass
-.Tweet
+.tweet
   &-footer
     &.is-active
-      .Social
+      .social
         // 4th level of nesting. It starts to smell...
         a
           text-decoration none
@@ -450,17 +450,17 @@ ul.UserList li span a:hover
 
 Styles are resolved during the renderer's layout pass. The selectors are resolved right to left, exiting when it has been detected the selector does not match. Therefore, in this example every a tag has to be inspected to see if it resides inside a span and a list. As you can imagine this requires a lot of DOM walking and for large documents can cause a significant increase in the layout time. For further reading checkout: https://developers.google.com/speed/docs/best-practices/rendering#UseEfficientCSSSelectors
 
-If we know we want to give all `a` elements inside the `.UserList` red on hover we can simplify this style to:
+If we know we want to give all `a` elements inside the `.userList` red on hover we can simplify this style to:
 
 ```sass
-.UserList > a:hover
+.userList > a:hover
   color red
 ```
 
-If we want to only style specific `a` elements inside `.UserList` we can make them descendants by giving a specific class:
+If we want to only style specific `a` elements inside `.userList` we can make them descendants by giving a specific class:
 
 ```css
-.UserList
+.userList
   &-linkPrimary:hover
     color red
 ```
