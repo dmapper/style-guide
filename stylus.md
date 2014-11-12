@@ -39,7 +39,7 @@ syntax: `js-<targetName>`
 JavaScript-specific classes reduce the risk that changing the structure or theme of components will inadvertently affect any required JavaScript behaviour and complex functionality. It is not neccesarry to use them in every case, just think of them as a tool in your utility belt. If you are creating a class, which you dont intend to use for styling, but instead only as a selector in JavaScript, you should probably be adding the `js-` prefix. In practice this looks like this:
 
 ```jade
-a.Button.-primary.js-login(href='/login')
+a.btn.-primary.js-login(href='/login')
 ```
 
 **Again, JavaScript-specific classes should not, under any circumstances, be styled.**
