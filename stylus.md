@@ -444,7 +444,7 @@ font-family Helvetica Neue Light, Helvetica Neue, Helvetica, Arial
 Although in the name (cascading style sheets) cascading can introduce unnecessary performance overhead for applying styles. Take the following example:
 
 ```sass
-ul.UserList li span a:hover 
+ul.userList li span a:hover 
   color red
 ```
 
