@@ -21,6 +21,7 @@ Influenced by:
 * [Layouts](#layouts)
   * [_layoutComponentName](#_layoutComponentName)
 * [Variables](#variables)
+  * [$componentName-property-value](#$componentName-property-value)
 * [Typography](#typography)
   * [Vertical Rhythm](#vertical-rhythm)
   * [font-size and line-height](#fontsize)
@@ -229,7 +230,10 @@ body.-users-show
 <a name="variables"></a>
 ## Variables
 
-Syntax: `[componentName-]<property>-<value>`
+<a name="$componentName-property-value"></a>
+### $componentName-property-value
+
+Syntax: `$[componentName-]<property>-<value>`
 
 Variable names in our CSS are also strictly structured. This syntax provides strong associations between property, use, and component.
 
