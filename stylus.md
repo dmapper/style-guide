@@ -21,7 +21,7 @@ Influenced by:
 * [Layouts](#layouts)
   * [_layoutComponentName](#_layoutComponentName)
 * [Variables](#variables)
-  * [$componentName-property-value](#$componentName-property-value)
+  * [$componentName-property-value](#componentName-property-value)
 * [Typography](#typography)
   * [Vertical Rhythm](#vertical-rhythm)
   * [font-size and line-height](#fontsize)
@@ -230,7 +230,7 @@ body.-users-show
 <a name="variables"></a>
 ## Variables
 
-<a name="$componentName-property-value"></a>
+<a name="componentName-property-value"></a>
 ### $componentName-property-value
 
 Syntax: `$[componentName-]<property>-<value>`
