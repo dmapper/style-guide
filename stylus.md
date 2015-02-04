@@ -10,6 +10,7 @@ Influenced by:
 **Table of contents**
 
 * [JavaScript](#javascript)
+  * [js-targetName](#js-targetName)
 * [Utilities](#utilities)
   * [u-utilityName](#u-utilityName)
 * [Components](#components)
@@ -34,7 +35,10 @@ Influenced by:
 <a name="javascript"></a>
 ## JavaScript
 
-syntax: `js-<targetName>`
+<a name="js-targetName"></a>
+### js-targetName
+
+Syntax: `js-<targetName>`
 
 JavaScript-specific classes reduce the risk that changing the structure or theme of components will inadvertently affect any required JavaScript behaviour and complex functionality. It is not neccesarry to use them in every case, just think of them as a tool in your utility belt. If you are creating a class, which you dont intend to use for styling, but instead only as a selector in JavaScript, you should probably be adding the `js-` prefix. In practice this looks like this:
 
