@@ -450,16 +450,16 @@ ul.userList li span a:hover
   color red
 ```
 
-Styles are resolved during the renderer's layout pass. The selectors are resolved right to left, exiting when it has been detected the selector does not match. Therefore, in this example every a tag has to be inspected to see if it resides inside a span and a list. As you can imagine this requires a lot of DOM walking and for large documents can cause a significant increase in the layout time. For further reading checkout: https://developers.google.com/speed/docs/best-practices/rendering#UseEfficientCSSSelectors
+Styles are resolved during the renderer's layout pass. The selectors are resolved right to left, exiting when it has been detected the selector does not match. Therefore, in this example every `a` tag has to be inspected to see if it resides inside a `span` and a `li`. As you can imagine this requires a lot of DOM walking and for large documents can cause a significant increase in the layout time.
 
 If we know we want to give all `a` elements inside the `.userList` red on hover we can simplify this style to:
 
 ```sass
-.userList > a:hover
+.userList a:hover
   color red
 ```
 
-If we want to only style specific `a` elements inside `.userList` we can make them elements by giving a specific class:
+If we want to only style specific `a` nodes inside `.userList` we can make them **elements** by giving a specific class:
 
 ```css
 .userList
