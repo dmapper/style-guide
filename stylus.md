@@ -135,7 +135,7 @@ button.btn.-primary
 
 States of components are the same as modifiers. Use `-stateName` for state-based modifications of components (i.e. `-hidden`, `-visible`, `-show`, `-expanded`). **Never style these classes directly; they should always be used as an adjoining class.**
 
-JS can add/remove these classes. Other than that there is practically no difference between modifiers and states, so actually when you talk to someone about some state just call it `modifier`.
+JS can add/remove these classes. Other than that there is practically no difference between modifiers and states, so actually when you talk to someone about some state just call it **modifier**.
 
 ```sass
 .tweet 
