@@ -350,7 +350,7 @@ Prefer nesting selectors. But no more then 3rd level (pseudo-classes and pseudo-
     li
       float left
       
-.tweet-footer.is-active .social
+.tweet-footer.-active .social
   a
     text-decoration none
   &-facebook
@@ -364,7 +364,7 @@ Prefer nesting selectors. But no more then 3rd level (pseudo-classes and pseudo-
 ```sass
 .tweet
   &-footer
-    &.is-active
+    &.-active
       .social
         // 4th level of nesting. It starts to smell...
         a
@@ -396,10 +396,10 @@ Meaningful chunks of code should be seperated by a single new line. It's usually
     &:hover
       color green
     
-  &.is-active
+  &.-active
     box-shadow 0 0 0 1px green inset
     
-  &.is-hidden
+  &.-hidden
     display none
 ```
 
@@ -412,9 +412,9 @@ Meaningful chunks of code should be seperated by a single new line. It's usually
   &-edit
     color #ccc
     border-radius 10px
-  &.is-active
+  &.-active
     box-shadow 0 0 0 1px green inset
-  &.is-hidden
+  &.-hidden
     display none
 ```
 
