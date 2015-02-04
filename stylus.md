@@ -350,7 +350,7 @@ Prefer nesting selectors. But no more then 3rd level (pseudo-classes and pseudo-
     li
       float left
       
-.tweet-footer.is-active .Social
+.tweet-footer.is-active .social
   a
     text-decoration none
   &-facebook
