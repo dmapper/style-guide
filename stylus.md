@@ -19,7 +19,7 @@ Influenced by:
   * [componentName.-stateOfComponent](#componentName.-stateOfComponent)
   * [componentName-elementName](#componentName-elementName)
 * [Layouts](#layouts)
-  * [_layoutComponent](#_layoutComponent)
+  * [_layoutComponentName](#_layoutComponentName)
 * [Variables](#variables)
 * [Typography](#typography)
   * [Vertical Rhythm](#vertical-rhythm)
@@ -83,7 +83,7 @@ Utilities must use a camel case name, prefixed with a `u` namespace. What follow
 <a name="components"></a>
 ## Components
 
-Syntax: `<componentName>[-descendantName|.-modifierName]`
+Syntax: `<componentName>[-elementName|.-modifierName]`
 
 Component driven development offers several benefits when reading and writing HTML and CSS:
 
@@ -182,8 +182,8 @@ article.tweet
 <a name="layouts"></a>
 ## Layouts
 
-<a name="_layoutComponent"></a>
-### _layoutComponent
+<a name="_layoutComponentName"></a>
+### _layoutComponentName
 
 Syntax: `<_layoutComponentName>[-layoutElementName|.-modifierName]`
 
