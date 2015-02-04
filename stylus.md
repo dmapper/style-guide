@@ -13,10 +13,10 @@ Influenced by:
 * [Utilities](#utilities)
   * [u-utilityName](#u-utilityName)
 * [Components](#components)
-  * [componentName](#ComponentName)
-  * [componentName.-modifierName](#ComponentName--modifierName)
-  * [componentName-descendantName](#ComponentName-descendantName)
-  * [componentName.is-stateOfComponent](#is-stateOfComponent)
+  * [componentName](#componentName)
+  * [componentName.-modifierName](#componentName.-modifierName)
+  * [componentName.-stateOfComponent](#componentName.-stateOfComponent)
+  * [componentName-elementName](#componentName-elementName)
 * [Layouts](#layouts)
 * [Variables](#variables)
 * [Typography](#typography)
@@ -107,7 +107,9 @@ article.myComponent
 <a name="componentName.-modifierName"></a>
 ### componentName.-modifierName
 
-A component modifier is a class that modifies the presentation of the base component in some form. Modifier names must be written in camel case and start with the hyphen. The class should be included in the HTML _in addition_ to the base component class.
+A component modifier is a class that modifies the presentation of the base component in some form. Modifier names must be written in camel case and start with the hyphen. **Never style these classes directly; they should always be used as an adjoining class.**
+
+The same modifier names can be used in multiple contexts, but every component must define its own styles for the state (as they are scoped to the component and used as an adjoining class).
 
 ```sass
 // Core button
@@ -127,10 +129,30 @@ A component modifier is a class that modifies the presentation of the base compo
 button.btn.-primary
   // …
 ```
-<a name="componentName-descendantName"></a>
-### componentName-descendantName
 
-A component descendant is a class that is attached to a descendant node of a component. It's responsible for applying presentation directly to the descendant on behalf of a particular component. Descendant names must be written in camel case.
+<a name="componentName.-stateOfComponent"></a>
+### componentName.-stateOfComponent
+
+States of components are the same as modifiers. Use `-stateName` for state-based modifications of components (i.e. `-hidden`, `-visible`, `-show`, `-expanded`). **Never style these classes directly; they should always be used as an adjoining class.**
+
+JS can add/remove these classes. Other than that there is practically no difference between modifiers and states.
+
+```sass
+.tweet 
+  // …
+  &.-expanded
+    // …
+```
+
+```jade
+article.tweet.-expanded
+  // …
+```
+
+<a name="componentName-elementName"></a>
+### componentName-elementName
+
+A component **element** is a class that is attached to a descendant node of a component. It's responsible for applying presentation directly to the descendant on behalf of a particular component. Element names must be written in camel case.
 
 ```sass
 .tweet
@@ -152,32 +174,12 @@ article.tweet
     // …
 ```
 
-<a name="is-stateOfComponent"></a>
-### componentName.is-stateOfComponent
-
-Use `is-stateName` for state-based modifications of components. The state name must be Camel case. **Never style these classes directly; they should always be used as an adjoining class.**
-
-JS can add/remove these classes. This means that the same state names can be used in multiple contexts, but every component must define its own styles for the state (as they are scoped to the component).
-
-```sass
-.tweet 
-  // …
-  &.is-expanded 
-    // …
-```
-
-```jade
-article.tweet.is-expanded
-  // …
-```
-
-
 <a name="layouts"></a>
 ## Layouts
 
 Layouts are the structure of an interface. Providing structure to pages and components, layouts are responsible for sizing and positioning of their elements. Layouts are generally used for laying out pages and regions within pages. Layouts that include viewport based media queries (width, height, etc…) should never be nested inside each other.
 
-Layouts start with an underscore (`_`) and written in camelCase. They can have descendants and modifiers and everything else like regular components.
+Layouts start with an underscore (`_`) and written in camelCase. They can have elements and modifiers and everything else like regular components.
 
 Layouts can be page-specific. In this case nest it under `body` with specific class name of current view.
 
@@ -378,7 +380,7 @@ Prefer nesting selectors. But no more then 3rd level (pseudo-classes and pseudo-
 <a name="spacing"></a>
 ### Spacing
 
-Meaningful chunks of code should be seperated by a single new line. It's usually a good idea to separate descendants and modifiers even when they have only couple of properties.
+Meaningful chunks of code should be seperated by a single new line. It's usually a good idea to separate elements and modifiers even when they have only couple of properties.
 
 **Right:**
 ```sass
@@ -457,7 +459,7 @@ If we know we want to give all `a` elements inside the `.userList` red on hover 
   color red
 ```
 
-If we want to only style specific `a` elements inside `.userList` we can make them descendants by giving a specific class:
+If we want to only style specific `a` elements inside `.userList` we can make them elements by giving a specific class:
 
 ```css
 .userList
