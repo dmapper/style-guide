@@ -19,6 +19,7 @@ Influenced by:
   * [componentName.-stateOfComponent](#componentName.-stateOfComponent)
   * [componentName-elementName](#componentName-elementName)
 * [Layouts](#layouts)
+  * [_layoutComponent](#_layoutComponent)
 * [Variables](#variables)
 * [Typography](#typography)
   * [Vertical Rhythm](#vertical-rhythm)
@@ -180,6 +181,11 @@ article.tweet
 
 <a name="layouts"></a>
 ## Layouts
+
+<a name="_layoutComponent"></a>
+### _layoutComponent
+
+Syntax: `<_layoutComponentName>[-layoutElementName|.-modifierName]`
 
 Layouts are the structure of an interface. Providing structure to pages and components, layouts are responsible for sizing and positioning of their elements. Layouts are generally used for laying out pages and regions within pages. Layouts that include viewport based media queries (width, height, etc…) should never be nested inside each other.
 
