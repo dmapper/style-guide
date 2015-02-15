@@ -115,7 +115,7 @@ article.myComponent
 
 A component modifier is a class that modifies the presentation of the base component in some form. Modifier names must be written in camel case and start with the hyphen. **Never style these classes directly; they should always be used as an adjoining class.**
 
-The same modifier names can be used in multiple contexts, but every component must define its own styles for the state (as they are scoped to the component and used as an adjoining class).
+The same modifier names can be used in multiple contexts, but every component must define its own styles for the modifier (as they are scoped to the component and used as an adjoining class).
 
 ```sass
 // Core button
