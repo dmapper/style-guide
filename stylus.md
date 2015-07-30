@@ -14,10 +14,10 @@ Influenced by:
 * [Utilities](#utilities)
   * [u-utilityName](#u-utilityName)
 * [Components](#components)
-  * [componentName](#componentName)
-  * [componentName.-modifierName](#componentName.-modifierName)
-  * [componentName.-stateOfComponent](#componentName.-stateOfComponent)
-  * [componentName-elementName](#componentName-elementName)
+  * [ComponentName](#componentName)
+  * [ComponentName.-modifierName](#componentName.-modifierName)
+  * [ComponentName.-stateOfComponent](#componentName.-stateOfComponent)
+  * [ComponentName-elementName](#componentName-elementName)
 * [Layouts](#layouts)
   * [_layoutComponentName](#_layoutComponentName)
 * [Variables](#variables)
@@ -84,7 +84,7 @@ Utilities must use a camel case name, prefixed with a `u` namespace. What follow
 <a name="components"></a>
 ## Components
 
-Syntax: `<componentName>[-elementName|.-modifierName]`
+Syntax: `<ComponentName>[-elementName|.-modifierName]`
 
 Component driven development offers several benefits when reading and writing HTML and CSS:
 
@@ -96,22 +96,22 @@ You can think of components as custom elements that enclose specific semantics, 
 
 
 <a name="componentName"></a>
-### componentName
+### ComponentName
 
-The component's name must be written in camel case.
+The component's name must be written in class case.
 
 ```sass
-.myComponent 
+.MyComponent 
   // …
 ```
 
 ```jade
-article.myComponent
+article.MyComponent
   // …
 ```
 
-<a name="componentName.-modifierName"></a>
-### componentName.-modifierName
+<a name="ComponentName.-modifierName"></a>
+### ComponentName.-modifierName
 
 A component modifier is a class that modifies the presentation of the base component in some form. Modifier names must be written in camel case and start with the hyphen. **Never style these classes directly; they should always be used as an adjoining class.**
 
@@ -119,7 +119,7 @@ The same modifier names can be used in multiple contexts, but every component mu
 
 ```sass
 // Core button
-.btn
+.Btn
   // …
   
   // Default button style
@@ -132,36 +132,36 @@ The same modifier names can be used in multiple contexts, but every component mu
 ```
 
 ```jade
-button.btn.-primary
+button.Btn.-primary
   // …
 ```
 
 <a name="componentName.-stateOfComponent"></a>
-### componentName.-stateOfComponent
+### ComponentName.-stateOfComponent
 
 States of components are the same as modifiers. Use `-stateName` for state-based modifications of components (i.e. `-hidden`, `-visible`, `-show`, `-expanded`). **Never style these classes directly; they should always be used as an adjoining class.**
 
 JS can add/remove these classes. Other than that there is practically no difference between modifiers and states, so actually when you talk to someone about some state just call it **modifier**.
 
 ```sass
-.tweet 
+.Tweet 
   // …
   &.-expanded
     // …
 ```
 
 ```jade
-article.tweet.-expanded
+article.Tweet.-expanded
   // …
 ```
 
 <a name="componentName-elementName"></a>
-### componentName-elementName
+### ComponentName-elementName
 
 A component **element** is a class that is attached to a descendant node of a component. It's responsible for applying presentation directly to the descendant on behalf of a particular component. Element names must be written in camel case.
 
 ```sass
-.tweet
+.Tweet
   background #eee
   &-header
     font-size 30px
@@ -172,11 +172,11 @@ A component **element** is a class that is attached to a descendant node of a co
 ```
 
 ```jade
-article.tweet
-  header.tweet-header
-    img.tweet-avatar(src='{{src}}' alt='{{alt}}')
+article.Tweet
+  header.Tweet-header
+    img.Tweet-avatar(src='{{src}}' alt='{{alt}}')
     // …
-  .tweet-body
+  .Tweet-body
     // …
 ```
 
@@ -231,9 +231,9 @@ body.-users-show
 ## Variables
 
 <a name="componentName-property-value"></a>
-### $componentName-property-value
+### $ComponentName-property-value
 
-Syntax: `$[componentName-]<property>-<value>`
+Syntax: `$[ComponentName-]<property>-<value>`
 
 Variable names in our CSS are also strictly structured. This syntax provides strong associations between property, use, and component.
 
@@ -243,13 +243,13 @@ Local variables inside functions and mixins may omit leading `$`.
 The following variable defintion is a color property, with the value grayLight, for use with the HighlightMenu component.
 
 ```sass
-// highlightMenu.styl
+// HighlightMenu.styl
 
-$highlightMenu-color-greyLight ?= rgb(51, 51, 50)
+$HighlightMenu-color-greyLight ?= rgb(51, 51, 50)
 
-.highlightMenu
+.HighlightMenu
   li 
-    color: $highlightMenu-color-greyLight
+    color: $HighlightMenu-color-greyLight
 ```
 
 All component variables should be defined inside the component file and using existential operator `?=`.
@@ -258,16 +258,16 @@ If you need to use _first component_'s variable in a _second component_ you shou
 
 ```sass
 // variables.styl
-$topbar-height = 80px
+$Topbar-height = 80px
 
-// topbar.styl
-$topbar-height ?= 80px
-.topbar
-  height $topbar-height
+// Topbar.styl
+$Topbar-height ?= 80px
+.Topbar
+  height $Topbar-height
 
-// topmenu.styl
-.topmenu
-  line-height $topbar-height
+// Topmenu.styl
+.Topmenu
+  line-height $Topbar-height
 ```
 
 
@@ -282,7 +282,7 @@ Basis for our typography is Vertical Rhythm -- page is vertically divided on lin
 When you deal with vertical sizes of anything (especially top/bottom margin/padding) try to avoid using `px`, instead use `rym()` function that returns proper size correspending to the specified amount of lines: 
 
 ```sass
-.header
+.Header
   padding-top rym(1)
   padding-bottom @padding-top
   margin-bottom rym(4)
@@ -325,7 +325,7 @@ Don't use any optional in Stylus symbols -- `:`, `;`, `{}`
 
 **Right:**
 ```css
-.tweet
+.Tweet
   color green
   background linear-gradient(#000, #fff)
   a
@@ -334,7 +334,7 @@ Don't use any optional in Stylus symbols -- `:`, `;`, `{}`
 
 **Wrong:**
 ```css
-.tweet {
+.Tweet {
   color: green;
   background: linear-gradient(#000, #fff);
   a {
@@ -351,7 +351,7 @@ Prefer nesting selectors. But no more then 3rd level (pseudo-classes and pseudo-
 
 **Right:**
 ```sass
-.tweet
+.Tweet
   &-header
     // …
   &-avatar
@@ -364,7 +364,7 @@ Prefer nesting selectors. But no more then 3rd level (pseudo-classes and pseudo-
     li
       float left
       
-.tweet-footer.-active .social
+.Tweet-footer.-active .Social
   a
     text-decoration none
   &-facebook
@@ -376,10 +376,10 @@ Prefer nesting selectors. But no more then 3rd level (pseudo-classes and pseudo-
 
 **Wrong:**
 ```sass
-.tweet
+.Tweet
   &-footer
     &.-active
-      .social
+      .Social
         // 4th level of nesting. It starts to smell...
         a
           text-decoration none
@@ -398,7 +398,7 @@ Meaningful chunks of code should be seperated by a single new line. It's usually
 
 **Right:**
 ```sass
-.content
+.Content
 
   background-color black
   color white
@@ -419,7 +419,7 @@ Meaningful chunks of code should be seperated by a single new line. It's usually
 
 **Wrong:**
 ```sass
-.content
+.Content
   background-color black
   color white
   font-size 20px
@@ -460,7 +460,7 @@ font-family Helvetica Neue Light, Helvetica Neue, Helvetica, Arial
 Although in the name (cascading style sheets) cascading can introduce unnecessary performance overhead for applying styles. Take the following example:
 
 ```sass
-ul.userList li span a:hover 
+ul.UserList li span a:hover 
   color red
 ```
 
@@ -469,14 +469,14 @@ Styles are resolved during the renderer's layout pass. The selectors are resolve
 If we know we want to give all `a` elements inside the `.userList` red on hover we can simplify this style to:
 
 ```sass
-.userList a:hover
+.UserList a:hover
   color red
 ```
 
 If we want to only style specific `a` nodes inside `.userList` we can make them **elements** by giving a specific class:
 
 ```css
-.userList
+.UserList
   &-linkPrimary:hover
     color red
 ```
