@@ -21,7 +21,7 @@ Influenced by:
 * [Layouts](#layouts)
   * [_layoutComponentName](#_layoutComponentName)
 * [Variables](#variables)
-  * [$componentName-property-value](#componentName-property-value)
+  * [$ComponentName-property-value](#componentName-property-value)
 * [Typography](#typography)
   * [Vertical Rhythm](#vertical-rhythm)
   * [font-size and line-height](#fontsize)
