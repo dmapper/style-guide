@@ -20,7 +20,7 @@ Influenced by:
   * [ComponentName-elementName](#componentName-elementName)
 * [Variables](#variables)
   * [Local (component) variable: _property](#property)
-  * [Global variables: $ComponentName-property](#componentName-property-value)
+  * [Global variables: $ComponentName-property](#componentName-property)
 * [Typography](#typography)
   * [Vertical Rhythm](#vertical-rhythm)
   * [font-size and line-height](#fontsize)
