@@ -10,18 +10,17 @@ Influenced by:
 **Table of contents**
 
 * [JavaScript](#javascript)
-  * [js-targetName](#js-targetName)
+  * [JS-targetName, T-targetName](#js-targetName)
 * [Utilities](#utilities)
-  * [u-utilityName](#u-utilityName)
+  * [U-utilityName](#u-utilityName)
 * [Components](#components)
   * [ComponentName](#componentName)
   * [ComponentName.-modifierName](#componentName.-modifierName)
   * [ComponentName.-stateOfComponent](#componentName.-stateOfComponent)
   * [ComponentName-elementName](#componentName-elementName)
-* [Layouts](#layouts)
-  * [_layoutComponentName](#_layoutComponentName)
 * [Variables](#variables)
-  * [$ComponentName-property-value](#componentName-property-value)
+  * [Local (component) variable: _property](#property)
+  * [Global variables: $ComponentName-property](#componentName-property-value)
 * [Typography](#typography)
   * [Vertical Rhythm](#vertical-rhythm)
   * [font-size and line-height](#fontsize)
@@ -38,17 +37,21 @@ Influenced by:
 ## JavaScript
 
 <a name="js-targetName"></a>
-### js-targetName
+### JS-targetName, T-targetName
 
-Syntax: `js-<targetName>`
+Syntax: `JS-<targetName>, T-targetName`
 
-JavaScript-specific classes reduce the risk that changing the structure or theme of components will inadvertently affect any required JavaScript behaviour and complex functionality. It is not neccesarry to use them in every case, just think of them as a tool in your utility belt. If you are creating a class, which you dont intend to use for styling, but instead only as a selector in JavaScript, you should probably be adding the `js-` prefix. In practice this looks like this:
+JavaScript-specific classes reduce the risk that changing the structure or theme of components will inadvertently affect any required JavaScript behaviour and complex functionality. It is not neccesarry to use them in every case, just think of them as a tool in your utility belt. If you are creating a class, which you dont intend to use for styling, but instead only as a selector in JavaScript, you should add the `JS-` prefix. The same concept is used to name classes to be used only in the End-to-End tests: `T-` prefix. In practice this looks like this:
 
 ```jade
-a.btn.-primary.js-login(href='/login')
+a.Button.-primary.JS-login(href='/login')
 ```
 
-**Again, JavaScript-specific classes should not, under any circumstances, be styled.**
+```jade
+a.Button.T-submit(href='/submit')
+```
+
+**Again, JavaScript-specific and Test-specific classes should not, under any circumstances, be styled.**
 
 <a name="utilities"></a>
 ## Utilities
@@ -67,17 +70,17 @@ Utilities exist because certain CSS properties and patterns are used frequently.
 ```
 
 <a name="u-utilityName"></a>
-### u-utilityName
+### U-utilityName
 
-Syntax: `u-<utilityName>`
+Syntax: `U-<utilityName>`
 
-Utilities must use a camel case name, prefixed with a `u` namespace. What follows is an example of how various utilities can be used to create a simple structure within a component.
+Utilities must use a camel case name, prefixed with a `U` namespace. What follows is an example of how various utilities can be used to create a simple structure within a component.
 
 ```jade
-.u-clearfix
-  a.u-pullLeft(href='{{url}}')
-    img.u-block(src='{{src}}' alt='')
-  p.u-sizeFill.u-textBreak
+.U-clearfix
+  a.U-pullLeft(href='{{url}}')
+    img.U-block(src='{{src}}' alt='')
+  p.U-sizeFill.U-textBreak
     // ... 
 ```
 
@@ -180,96 +183,70 @@ article.Tweet
     // …
 ```
 
-<a name="layouts"></a>
-## Layouts
-
-<a name="_layoutComponentName"></a>
-### _layoutComponentName
-
-Syntax: `<_layoutComponentName>[-layoutElementName|.-modifierName]`
-
-Layouts are the structure of an interface. Providing structure to pages and components, layouts are responsible for sizing and positioning of their elements. Layouts are generally used for laying out pages and regions within pages. Layouts that include viewport based media queries (width, height, etc…) should never be nested inside each other.
-
-Layouts start with an underscore (`_`) and written in camelCase. They can have elements and modifiers and everything else like regular components.
-
-Layouts can be page-specific. In this case nest it under `body` with specific class name of current view.
-
-```sass
-// General layout
-._page
-  background-color #eee
-  max-width 800px
-  margin 0 auto
-
-// Layout for 'users' controller, 'show' action
-body.-users-show
-  ._page
-    display flex
-    max-width 1200px
-  ._left
-    width 20%
-    &-section
-      background red
-  ._content
-    width 80%
-    &-section
-      background blue
-```
-
-```jade
-._page
-  ._left
-    ._left-section
-    ._left-section
-  ._content
-    ._content-section
-    ._content-section
-```
-
-
 <a name="variables"></a>
 ## Variables
 
-<a name="componentName-property-value"></a>
-### $ComponentName-property-value
+<a name="property"></a>
+### Local (component) variables: _property
 
-Syntax: `$[ComponentName-]<property>-<value>`
+Syntax: `_<property>`
 
-Variable names in our CSS are also strictly structured. This syntax provides strong associations between property, use, and component.
+Local (compontent) variables (located inside a `.styl` file of a particular JS component) must start with `_` and should NOT be prefixed with the component's name.
 
-Global and component-level variables MUST start with `$`.  
-Local variables inside functions and mixins may omit leading `$`.
-
-The following variable defintion is a color property, with the value grayLight, for use with the HighlightMenu component.
+The following variable defintion is a color property within HighlightMenu component for usage ONLY in this component.
 
 ```sass
 // HighlightMenu.styl
 
-$HighlightMenu-color-greyLight ?= rgb(51, 51, 50)
+_color = rgb(51, 51, 50)
 
 .HighlightMenu
-  li 
-    color: $HighlightMenu-color-greyLight
+  li
+    color _color
 ```
 
-All component variables should be defined inside the component file and using existential operator `?=`.
+<a name="componentName-property"></a>
+### Global variables: $ComponentName-property
 
-If you need to use _first component_'s variable in a _second component_ you should duplicate this variable into global `variables.styl` but using `=` operator this time:
+Syntax: `$[ComponentName-]<property>`
+
+If (and only if) you need to use `_first component_`'s variable in a `_second component_` you should make `_first component_`'s local variable into a global file `variables.styl` and change it's name to follow the global variables naming convention.
+
+Global variables MUST be prefixed with the `ComponentName` and start with `$`.
+
+Let's say we want to use the local variable `_color` of `HighlightMenu` from our previous example, in another component `Topbar`. We need to do the following refactoring:
+
+1. Move the constant out of `HighlightMenu.styl` into global `variables.styl` using the global variables naming convention:
 
 ```sass
 // variables.styl
-$Topbar-height = 80px
 
-// Topbar.styl
-$Topbar-height ?= 80px
-.Topbar
-  height $Topbar-height
-
-// Topmenu.styl
-.Topmenu
-  line-height $Topbar-height
+$HighlightMenu-color = rgb(51, 51, 50)
 ```
 
+2. Use the global variable to define local variables inside `HighlightMenu` AND `Topbar`. **IMPORTANT! Global variables MUST NOT be used directly to specify CSS properties. Inside a component you MUST first define all global variables as local before using them.** Note that the local variable names can be different in different components, based on their meaning. In `HighlightMenu` we call it just `_color`, while in `Topbar` it's called `_linkColor` to better define the meaning of that color in the topbar.
+
+```sass
+// HighlightMenu.styl
+
+_color = $HighlightMenu-color
+
+.HighlightMenu
+  li 
+    color _color
+```
+
+```sass
+// Topbar.styl
+
+_color = black
+_linkColor = $HighlightMenu-color
+
+.Topbar
+  background _color
+  a
+    color _linkColor
+```
 
 <a name="typography"></a>
 ## Typography
