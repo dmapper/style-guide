@@ -51,7 +51,7 @@ The component's name must be written in class case.
 ```
 
 ```html
-<MyComponent />
+<div className='MyComponent' />
 ```
 
 <a name="componentName-elementName"></a>
