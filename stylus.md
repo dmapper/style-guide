@@ -9,85 +9,27 @@ Influenced by:
 
 **Table of contents**
 
+* [Components](#components)
+  * [ComponentName](#componentName)
+  * [ComponentName-elementName](#componentName-elementName)  
+  * [ComponentName.-modifierName](#componentName.-modifierName)
+* [Variables](#variables)
+  * [Local (component) variable: _property](#property)
+  * [Global variables: $ComponentName-property](#componentName-property)
 * [JavaScript](#javascript)
   * [JS-targetName, T-targetName](#js-targetName)
 * [Utilities](#utilities)
   * [U-utilityName](#u-utilityName)
-* [Components](#components)
-  * [ComponentName](#componentName)
-  * [ComponentName.-modifierName](#componentName.-modifierName)
-  * [ComponentName.-stateOfComponent](#componentName.-stateOfComponent)
-  * [ComponentName-elementName](#componentName-elementName)
-* [Variables](#variables)
-  * [Local (component) variable: _property](#property)
-  * [Global variables: $ComponentName-property](#componentName-property)
-* [Typography](#typography)
-  * [Vertical Rhythm](#vertical-rhythm)
-  * [font-size and line-height](#fontsize)
 * [Formatting](#formatting)
   * [Symbols](#symbols)
   * [Nesting](#nesting)
   * [Spacing](#spacing)
   * [Quotes](#quotes)
-* [Performance](#performance)
-  * [Specificity](#specificity)
-
-
-<a name="javascript"></a>
-## JavaScript
-
-<a name="js-targetName"></a>
-### JS-targetName, T-targetName
-
-Syntax: `JS-<targetName>, T-targetName`
-
-JavaScript-specific classes reduce the risk that changing the structure or theme of components will inadvertently affect any required JavaScript behaviour and complex functionality. It is not neccesarry to use them in every case, just think of them as a tool in your utility belt. If you are creating a class, which you dont intend to use for styling, but instead only as a selector in JavaScript, you should add the `JS-` prefix. The same concept is used to name classes to be used only in the End-to-End tests: `T-` prefix. In practice this looks like this:
-
-```jade
-a.Button.-primary.JS-login(href='/login')
-```
-
-```jade
-a.Button.T-submit(href='/submit')
-```
-
-**Again, JavaScript-specific and Test-specific classes should not, under any circumstances, be styled.**
-
-<a name="utilities"></a>
-## Utilities
-
-Utility classes are low-level structural and positional traits. Utilities can be applied directly to any element; multiple utilities can be used together; and utilities can be used alongside component classes.
-
-Utilities exist because certain CSS properties and patterns are used frequently. For example: floats, containing floats, vertical alignment, text truncation. Relying on utilities can help to reduce repetition and provide consistent implementations. They also act as a philosophical alternative to functional (i.e. non-polyfill) mixins.
-
-
-```jade
-.u-clearfix
-  p.u-textTruncate {{text}}
-  img.u-pullLeft(src='{{src}}' alt='')
-  img.u-pullLeft(src='{{src}}' alt='')
-  img.u-pullLeft(src='{{src}}' alt='')
-```
-
-<a name="u-utilityName"></a>
-### U-utilityName
-
-Syntax: `U-<utilityName>`
-
-Utilities must use a camel case name, prefixed with a `U` namespace. What follows is an example of how various utilities can be used to create a simple structure within a component.
-
-```jade
-.U-clearfix
-  a.U-pullLeft(href='{{url}}')
-    img.U-block(src='{{src}}' alt='')
-  p.U-sizeFill.U-textBreak
-    // ... 
-```
 
 <a name="components"></a>
 ## Components
 
-Syntax: `<ComponentName>[-elementName|.-modifierName]`
+Syntax: `ComponentName[-elementName][.-modifierName]`
 
 Component driven development offers several benefits when reading and writing HTML and CSS:
 
@@ -103,59 +45,13 @@ You can think of components as custom elements that enclose specific semantics, 
 
 The component's name must be written in class case.
 
-```sass
+```styl
 .MyComponent 
-  // …
+  color red
 ```
 
-```jade
-article.MyComponent
-  // …
-```
-
-<a name="ComponentName.-modifierName"></a>
-### ComponentName.-modifierName
-
-A component modifier is a class that modifies the presentation of the base component in some form. Modifier names must be written in camel case and start with the hyphen. **Never style these classes directly; they should always be used as an adjoining class.**
-
-The same modifier names can be used in multiple contexts, but every component must define its own styles for the modifier (as they are scoped to the component and used as an adjoining class).
-
-```sass
-// Core button
-.Btn
-  // …
-  
-  // Default button style
-  &.-default
-    // …
-
-  // Error button style
-  &.-error
-    // …
-```
-
-```jade
-button.Btn.-primary
-  // …
-```
-
-<a name="componentName.-stateOfComponent"></a>
-### ComponentName.-stateOfComponent
-
-States of components are the same as modifiers. Use `-stateName` for state-based modifications of components (i.e. `-hidden`, `-visible`, `-show`, `-expanded`). **Never style these classes directly; they should always be used as an adjoining class.**
-
-JS can add/remove these classes. Other than that there is practically no difference between modifiers and states, so actually when you talk to someone about some state just call it **modifier**.
-
-```sass
-.Tweet 
-  // …
-  &.-expanded
-    // …
-```
-
-```jade
-article.Tweet.-expanded
-  // …
+```html
+<MyComponent />
 ```
 
 <a name="componentName-elementName"></a>
@@ -163,7 +59,7 @@ article.Tweet.-expanded
 
 A component **element** is a class that is attached to a descendant node of a component. It's responsible for applying presentation directly to the descendant on behalf of a particular component. Element names must be written in camel case.
 
-```sass
+```styl
 .Tweet
   background #eee
   &-header
@@ -174,13 +70,55 @@ A component **element** is a class that is attached to a descendant node of a co
     background white
 ```
 
-```jade
-article.Tweet
-  header.Tweet-header
-    img.Tweet-avatar(src='{{src}}' alt='{{alt}}')
-    // …
-  .Tweet-body
-    // …
+```html
+<div className='Tweet'>
+  <div className='Tweet-header'>
+    <img className='Tweet-avatar' src={src} alt={alt} />
+  </div>
+  <div className='Tweet-body' />
+</div> 
+```
+
+<a name="componentName.-modifierName"></a>
+### ComponentName.-modifierName
+
+Syntax: 
+1. `ComponentName.-modifierName`
+2. `ComponentName-elementName.-modifierName`
+
+A modifier is a class that modifies the presentation of the base component or element in some way. Modifier names must be written in camel case and start with the hyphen. **Never style these classes directly; they should always be used as an adjoining class.**
+
+You should also use modifiers to define states of the component: `-hidden`, `-visible`, `-show`, `-expanded`, etc.
+
+The same modifier names can be used in multiple contexts, but every component must define its own styles for the modifier (as they are scoped to the component/element and used as an adjoining class).
+
+```styl
+.Btn
+  color black              // Default button style
+
+  &.-error
+    color red              // Error button style
+    
+.Topbar
+  background-color blue    // Default topbar style
+  
+  &-link    
+    color blue             // Default link style
+    &.-active              
+      color white          // When link is active
+      
+  &.-dark                  
+    background-color black // Dark topbar style
+    
+```
+
+```html
+<button className='Btn -primary'>Submit</button>
+<div className='Topbar -dark'>
+  <a className='Topbar-link -active' href='/'>Home</a>
+  <a className='Topbar-link' href='/about'>About</a>
+  <a className='Topbar-link' href='/contact'>Contact us</a>
+</div>
 ```
 
 <a name="variables"></a>
@@ -208,7 +146,7 @@ _color = rgb(51, 51, 50)
 <a name="componentName-property"></a>
 ### Global variables: $ComponentName-property
 
-Syntax: `$[ComponentName-]<property>`
+Syntax: `$ComponentName-<property>`
 
 If (and only if) you need to use `_first component_`'s variable in a `_second component_` you should make `_first component_`'s local variable into a global file `variables.styl` and change it's name to follow the global variables naming convention.
 
@@ -218,7 +156,7 @@ Let's say we want to use the local variable `_color` of `HighlightMenu` from our
 
 1. Move the constant out of `HighlightMenu.styl` into global `variables.styl` using the global variables naming convention:
 
-```sass
+```styl
 // variables.styl
 
 $HighlightMenu-color = rgb(51, 51, 50)
@@ -226,7 +164,7 @@ $HighlightMenu-color = rgb(51, 51, 50)
 
 2. Use the global variable to define local variables inside `HighlightMenu` AND `Topbar`. **IMPORTANT! Global variables MUST NOT be used directly to specify CSS properties. Inside a component you MUST first define all global variables as local before using them.** Note that the local variable names can be different in different components, based on their meaning. In `HighlightMenu` we call it just `_color`, while in `Topbar` it's called `_linkColor` to better define the meaning of that color in the topbar.
 
-```sass
+```styl
 // HighlightMenu.styl
 
 _color = $HighlightMenu-color
@@ -236,7 +174,7 @@ _color = $HighlightMenu-color
     color _color
 ```
 
-```sass
+```styl
 // Topbar.styl
 
 _color = black
@@ -248,44 +186,55 @@ _linkColor = $HighlightMenu-color
     color _linkColor
 ```
 
-<a name="typography"></a>
-## Typography
+<a name="javascript"></a>
+## JavaScript
 
+<a name="js-targetName"></a>
+### JS-targetName, T-targetName
 
-<a name="vertical-rhythm"></a>
-### Vertical Rhythm
+Syntax: `JS-<targetName>, T-targetName`
 
-Basis for our typography is Vertical Rhythm -- page is vertically divided on lines `5px` or `6px` high. 
-When you deal with vertical sizes of anything (especially top/bottom margin/padding) try to avoid using `px`, instead use `rym()` function that returns proper size correspending to the specified amount of lines: 
+JavaScript-specific classes reduce the risk that changing the structure or theme of components will inadvertently affect any required JavaScript behaviour and complex functionality. It is not neccesarry to use them in every case, just think of them as a tool in your utility belt. If you are creating a class, which you dont intend to use for styling, but instead only as a selector in JavaScript, you should add the `JS-` prefix. The same concept is used to name classes to be used only in the End-to-End tests: `T-` prefix. In practice this looks like this:
 
-```sass
-.Header
-  padding-top rym(1)
-  padding-bottom @padding-top
-  margin-bottom rym(4)
+```html
+<a className='Button -primary JS-login' href='/login' />
 ```
 
-
-<a name="fontsize"></a>
-### font-size and line-height
-
-Set font-size either in `px` or `em`. 
-Value in `px` will return a corresponding `rem` value and set proper line-height which is going to be equal to the amount of vertical rhythm lines that this font-size can fit into.
-Avoid direct usage of line-height.
-
-```sass
-p
-  font-size 18px
+```html
+<a className='Button T-submit' href='/submit' />
 ```
 
-If vertical rhythm line is 6px and html font size is 16px it will compile into
+**Again, JavaScript-specific and Test-specific classes should not, under any circumstances, be styled.**
 
-```css
-p {
-  font-size: 1.125rem;
-  /* nearest amount of Vertical Rhythm lines is 4 -- 24px */
-  line-height: 1.5rem;  
-}
+<a name="utilities"></a>
+## Utilities
+
+Utility classes are low-level structural and positional traits. Utilities can be applied directly to any element; multiple utilities can be used together; and utilities can be used alongside component classes.
+
+Utilities exist because certain CSS properties and patterns are used frequently. For example: floats, containing floats, vertical alignment, text truncation. Relying on utilities can help to reduce repetition and provide consistent implementations. They also act as a philosophical alternative to functional (i.e. non-polyfill) mixins.
+
+
+```html
+<div className='U-clearfix'>
+  <p className='U-textTruncate'>{text}</p>
+  <img className='U-pullLeft' src={src} alt='' />
+</div> 
+```
+
+<a name="u-utilityName"></a>
+### U-utilityName
+
+Syntax: `U-<utilityName>`
+
+Utilities must use a camel case name, prefixed with a `U` namespace. What follows is an example of how various utilities can be used to create a simple structure within a component.
+
+```html
+<div className='U-clearfix'>
+  <a className='U-pullLeft' href={url}>
+    <img className='U-block' src={src} alt='' />
+  </a>  
+  <p className='U-sizeFill U-textBreak'>Lorem Ipsum</p>
+</div> 
 ```
 
 
@@ -301,7 +250,7 @@ The following are some high level page formatting style rules.
 Don't use any optional in Stylus symbols -- `:`, `;`, `{}`
 
 **Right:**
-```css
+```styl
 .Tweet
   color green
   background linear-gradient(#000, #fff)
@@ -310,7 +259,7 @@ Don't use any optional in Stylus symbols -- `:`, `;`, `{}`
 ```
 
 **Wrong:**
-```css
+```styl
 .Tweet {
   color: green;
   background: linear-gradient(#000, #fff);
@@ -327,7 +276,7 @@ Don't use any optional in Stylus symbols -- `:`, `;`, `{}`
 Prefer nesting selectors. But no more then 3rd level (pseudo-classes and pseudo-elements doesn't count).
 
 **Right:**
-```sass
+```styl
 .Tweet
   &-header
     // …
@@ -352,7 +301,7 @@ Prefer nesting selectors. But no more then 3rd level (pseudo-classes and pseudo-
 ```
 
 **Wrong:**
-```sass
+```styl
 .Tweet
   &-footer
     &.-active
@@ -374,7 +323,7 @@ Prefer nesting selectors. But no more then 3rd level (pseudo-classes and pseudo-
 Meaningful chunks of code should be seperated by a single new line. It's usually a good idea to separate elements and modifiers even when they have only couple of properties.
 
 **Right:**
-```sass
+```styl
 .Content
 
   background-color black
@@ -395,7 +344,7 @@ Meaningful chunks of code should be seperated by a single new line. It's usually
 ```
 
 **Wrong:**
-```sass
+```styl
 .Content
   background-color black
   color white
@@ -416,44 +365,13 @@ Meaningful chunks of code should be seperated by a single new line. It's usually
 Use single quotes.
 
 **Right:**
-```sass
+```styl
 background-image url('/img/you.jpg')
 font-family 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial
 ```
 
 **Wrong:**
-```sass
+```styl
 background-image url(/img/you.jpg)
 font-family Helvetica Neue Light, Helvetica Neue, Helvetica, Arial
-```
-
-
-<a name="performance"></a>
-## Performance
-
-<a name="specificity"></a>
-### Specificity
-
-Although in the name (cascading style sheets) cascading can introduce unnecessary performance overhead for applying styles. Take the following example:
-
-```sass
-ul.UserList li span a:hover 
-  color red
-```
-
-Styles are resolved during the renderer's layout pass. The selectors are resolved right to left, exiting when it has been detected the selector does not match. Therefore, in this example every `a` tag has to be inspected to see if it resides inside a `span` and a `li`. As you can imagine this requires a lot of DOM walking and for large documents can cause a significant increase in the layout time.
-
-If we know we want to give all `a` elements inside the `.userList` red on hover we can simplify this style to:
-
-```sass
-.UserList a:hover
-  color red
-```
-
-If we want to only style specific `a` nodes inside `.userList` we can make them **elements** by giving a specific class:
-
-```css
-.UserList
-  &-linkPrimary:hover
-    color red
 ```
